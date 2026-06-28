@@ -337,3 +337,78 @@ select:focus {
     padding-inline: var(--space-2);
   }
 }
+
+/* ------------------------------------------------------------
+   9. FORM INPUT PRIMITIVE
+   border-width is locked at 1px across ALL states.
+   State changes (focus, error, disabled, read-only) touch
+   only border-color, outline, and box-shadow — never
+   border-width. This prevents layout shift on transitions.
+   ------------------------------------------------------------ */
+.form-input {
+  font-family: var(--font-body);
+  font-size: var(--type-body-font-size);
+  line-height: var(--type-body-line-height);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  /* border-width is set once and never overridden */
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-1) var(--space-2);
+  width: 100%;
+  outline: none;
+  box-shadow: none;
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+/* Focus — border-color + box-shadow only; border-width unchanged */
+.form-input:focus {
+  border-color: var(--color-focus);
+  box-shadow: var(--shadow-focus);
+  outline: none;
+}
+
+/* Error — border-color + box-shadow only; border-width unchanged */
+.form-input[aria-invalid="true"],
+.form-input.is-error {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(214, 90, 26, 0.15);
+  outline: none;
+}
+
+/* Error + focused — border-color + box-shadow only; border-width unchanged */
+.form-input[aria-invalid="true"]:focus,
+.form-input.is-error:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(214, 90, 26, 0.25);
+  outline: none;
+}
+
+/* Disabled — border-color only; border-width unchanged */
+.form-input:disabled {
+  border-color: var(--color-border);
+  background-color: var(--color-muted-surface);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Read-only — border-color only; border-width unchanged */
+.form-input:read-only {
+  border-color: var(--color-border);
+  background-color: var(--color-muted-surface);
+  cursor: default;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Placeholder */
+.form-input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
