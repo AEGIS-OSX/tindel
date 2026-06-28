@@ -37,6 +37,7 @@
   /* Color — focus */
   --color-focus: #D65A1A;
   --shadow-focus: 0 0 0 3px rgba(214, 90, 26, 0.25);
+  --shadow-error: 0 0 0 3px rgba(214, 90, 26, 0.15);
 
   /* Typography — families */
   --font-display: "Domaine Display", "Playfair Display", Georgia, serif;
@@ -132,7 +133,7 @@
    2. DARK MODE OVERRIDES
    ------------------------------------------------------------ */
 @media (prefers-color-scheme: dark) {
-  :root {
+  html {
     --color-bg: var(--color-bg-dark);
     --color-surface: var(--color-surface-dark);
     --color-text: var(--color-text-dark);
@@ -376,7 +377,7 @@ select:focus {
 .form-input[aria-invalid="true"],
 .form-input.is-error {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(214, 90, 26, 0.15);
+  box-shadow: var(--shadow-error);
   outline: none;
 }
 
@@ -384,7 +385,7 @@ select:focus {
 .form-input[aria-invalid="true"]:focus,
 .form-input.is-error:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(214, 90, 26, 0.25);
+  box-shadow: var(--shadow-focus);
   outline: none;
 }
 
