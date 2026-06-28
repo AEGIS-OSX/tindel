@@ -1,0 +1,183 @@
+/*
+  .btn-primary — all 8 interactive states
+  =========================================
+  1. default
+  2. :hover
+  3. :focus-visible  (outline only; outline has NO transition entry)
+  4. :active
+  5. :disabled       (native)
+  6. [aria-disabled="true"]  (ARIA, stays in tab order)
+  7. [data-loading="true"]   (async loading — spinner via ::after)
+  8. [aria-pressed="true"]   (toggle / pressed)
+
+  Import this file in app/globals.css or the root layout.
+  All color values use CSS custom properties from :root.
+*/
+
+/* 1. Default */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-4);
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: var(--type-button-font-size);
+  font-weight: var(--type-button-font-weight);
+  line-height: var(--type-button-line-height);
+  letter-spacing: 0.01em;
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+  /*
+    Transition covers background, border, color, box-shadow, transform.
+    outline is intentionally ABSENT from this list so focus rings
+    appear instantly (no transition on outline).
+  */
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+/* 2. Hover */
+.btn-primary:hover:not(:disabled):not([aria-disabled="true"]):not([data-loading="true"]) {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+/* 3. Focus-visible — outline only, no transition on outline */
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  /* outline intentionally absent from the transition list above */
+}
+
+/* 4. Active */
+.btn-primary:active:not(:disabled):not([aria-disabled="true"]):not([data-loading="true"]) {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  color: #FFFFFF;
+  box-shadow: none;
+  transform: translateY(1px);
+}
+
+/* 5. Disabled (native) */
+.btn-primary:disabled {
+  background-color: var(--color-border);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 1; /* explicit — do not inherit global button:disabled opacity:0.5 */
+  box-shadow: none;
+  pointer-events: none;
+  transform: none;
+}
+
+/* 6. aria-disabled (non-native — stays in tab order for screen readers) */
+.btn-primary[aria-disabled="true"] {
+  background-color: var(--color-border);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+  pointer-events: none;
+  transform: none;
+}
+
+/* 7. Loading state */
+.btn-primary[data-loading="true"] {
+  color: transparent; /* hide label while spinner is visible */
+  cursor: wait;
+  pointer-events: none;
+  transform: none;
+}
+
+.btn-primary[data-loading="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #FFFFFF;
+  border-radius: var(--radius-pill);
+  animation: btn-spin 0.6s linear infinite;
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary[data-loading="true"]::after {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+/* 8. Pressed state (toggle buttons) */
+.btn-primary[aria-pressed="true"] {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  color: #FFFFFF;
+  box-shadow: none;
+}
+
+/* -------------------------------------------------------
+   Dark mode overrides
+   ------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  /* 1. Default */
+  .btn-primary {
+    background-color: var(--color-text-dark);
+    border-color: var(--color-text-dark);
+    color: var(--color-bg-dark);
+  }
+
+  /* 2. Hover */
+  .btn-primary:hover:not(:disabled):not([aria-disabled="true"]):not([data-loading="true"]) {
+    background-color: var(--color-accent-darkmode);
+    border-color: var(--color-accent-darkmode);
+    color: #FFFFFF;
+  }
+
+  /* 4. Active */
+  .btn-primary:active:not(:disabled):not([aria-disabled="true"]):not([data-loading="true"]) {
+    background-color: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+    color: #FFFFFF;
+  }
+
+  /* 5+6. Disabled */
+  .btn-primary:disabled,
+  .btn-primary[aria-disabled="true"] {
+    background-color: var(--color-border-dark);
+    border-color: var(--color-border-dark);
+    color: var(--color-text-muted-dark);
+  }
+
+  /* 8. Pressed */
+  .btn-primary[aria-pressed="true"] {
+    background-color: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+    color: #FFFFFF;
+  }
+
+  /* 7. Loading spinner */
+  .btn-primary[data-loading="true"]::after {
+    border-color: rgba(237, 235, 233, 0.35);
+    border-top-color: var(--color-text-dark);
+  }
+}
