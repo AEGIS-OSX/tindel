@@ -1,309 +1,323 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+/* ============================================================
+   TINDEL — GLOBAL CSS
+   Design tokens, typography, spacing, component primitives.
+   Tailwind v4 CSS-first: no tailwind.config.js.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. DESIGN TOKENS — LIGHT MODE
+   ------------------------------------------------------------ */
 :root {
-  --color-primary: #0F0E0E;
-  --color-accent: #D65A1A;
+  /* Color — base */
   --color-bg: #FFFFFF;
-  --color-text: #0F0E0E;
-  --color-muted-surface: #FBF8F5;
   --color-surface: #F7F5F2;
+  --color-muted-surface: #FBF8F5;
+  --color-primary: #0F0E0E;
+  --color-text: #0F0E0E;
   --color-text-muted: #8F8783;
+  --color-border: #E9E4E0;
+  --color-accent: #D65A1A;
   --color-accent-dark: #B04A14;
   --color-brass: #B08B57;
   --color-success: #2F7A3F;
-  --color-shadow: rgba(13,12,11,0.06);
+  --color-shadow: rgba(13, 12, 11, 0.06);
+
+  /* Color — dark mode (explicit mapping) */
+  --color-bg-dark: #0B0A09;
+  --color-surface-dark: #121212;
+  --color-text-dark: #EDEBE9;
+  --color-text-muted-dark: #BDB6AF;
+  --color-border-dark: #232221;
   --color-accent-darkmode: #D65A1A;
   --color-brass-dark: #B08B57;
-  --color-shadow-dark: rgba(0,0,0,0.6);
-  --color-border: #E9E4E0;
-  --space-base: 8px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
+  --color-shadow-dark: rgba(0, 0, 0, 0.6);
+
+  /* Typography — families */
   --font-display: "Domaine Display", "Playfair Display", Georgia, serif;
   --font-body: "Söhne Text", "Merriweather Sans", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "Berkeley Mono", "JetBrains Mono", SFMono-Regular, Menlo, monospace;
-}
 
-html, body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-body);
-}
+  /* Typography — type ramp */
+  --type-h1-font-size: 64px;
+  --type-h1-line-height: 72px;
+  --type-h1-font-weight: 700;
+  --type-h1-letter-spacing: -0.02em;
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-}
+  --type-h2-font-size: 34px;
+  --type-h2-line-height: 40px;
+  --type-h2-font-weight: 600;
 
-/* ─── Tindel: base resets ─── */
-html,
-body {
-  overflow-x: clip; /* clip not hidden — preserves position:sticky */
-}
+  --type-h3-font-size: 24px;
+  --type-h3-line-height: 32px;
+  --type-h3-font-weight: 600;
 
-/* ─── Tindel: animation easing tokens ─── */
-:root {
-  --ease-tindel: cubic-bezier(0.2, 0.9, 0.25, 1);
-  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
-  --ease-in-out: cubic-bezier(0.4, 0.0, 0.6, 1);
+  --type-h4-font-size: 18px;
+  --type-h4-line-height: 28px;
+  --type-h4-font-weight: 600;
 
-  /* Dark-surface tokens (used in hero and How It Works sections) */
-  --color-surface-dark: #121212;
-  --color-border-dark: #232221;
-  --color-text-dark: #EDEBE9;
-  --color-text-muted-dark: #BDB6AF;
-  --color-bg-dark: #0B0A09;
+  --type-body-font-size: 16px;
+  --type-body-line-height: 24px;
+  --type-body-font-weight: 400;
 
-  /* Focus ring */
-  --color-focus: var(--color-accent);
-  --shadow-focus: 0 0 0 4px rgba(214, 90, 26, 0.18);
+  --type-small-font-size: 14px;
+  --type-small-line-height: 20px;
 
-  /* Type scale tokens */
-  --text-display: 64px;
-  --text-h2: 34px;
-  --text-h3: 24px;
-  --text-h4: 18px;
-  --text-body: 16px;
-  --text-small: 14px;
-  --text-caption: 13px;
+  --type-caption-font-size: 13px;
+  --type-caption-line-height: 18px;
 
-  /* Spacing scale (8px base) */
+  --type-button-font-size: 16px;
+  --type-button-line-height: 20px;
+  --type-button-font-weight: 600;
+
+  --type-label-font-size: 14px;
+  --type-label-line-height: 20px;
+  --type-label-font-weight: 600;
+
+  /* Spacing — 8px base scale */
+  --space-0: 0px;
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;
   --space-4: 32px;
   --space-5: 40px;
   --space-6: 48px;
-  --space-7: 64px;
-  --space-8: 80px;
-  --space-9: 120px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-9: 72px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-16: 128px;
+  --space-20: 160px;
 
-  /* Radius system — ONE consistent set */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
   --radius-pill: 9999px;
 
-  /* Shadows */
-  --shadow-card: 0 6px 20px var(--color-shadow);
-  --shadow-focus-ring: 0 0 0 4px rgba(214, 90, 26, 0.12);
+  /* Breakpoints (reference only — use in media queries) */
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1440px;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
 }
 
-/* ─── Tindel: base typography ─── */
+/* ------------------------------------------------------------
+   2. DARK MODE OVERRIDES
+   ------------------------------------------------------------ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: var(--color-bg-dark);
+    --color-surface: var(--color-surface-dark);
+    --color-text: var(--color-text-dark);
+    --color-text-muted: var(--color-text-muted-dark);
+    --color-border: var(--color-border-dark);
+    --color-shadow: var(--color-shadow-dark);
+  }
+}
+
+/* ------------------------------------------------------------
+   3. RESET & BASE
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
 body {
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  line-height: 24px;
-  color: var(--color-text);
-  background-color: var(--color-bg);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip; /* clip not hidden — preserves position:sticky */
 }
 
-/* ─── Tindel: focus ring system ─── */
-*:focus {
-  outline: 2px solid transparent;
-  outline-offset: 1px;
-}
-*:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 1px;
-  box-shadow: var(--shadow-focus-ring);
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
-/* ─── Tindel: display heading base ─── */
-.tindel-display {
-  font-family: var(--font-display);
-  font-size: var(--text-display);
-  line-height: 72px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  overflow-wrap: anywhere;
-  min-width: 0;
-}
-
-/* ─── Tindel: reduced motion ─── */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-/* ─── Tindel: numbered-drop badge ─── */
-.drop-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  background-color: var(--color-accent);
-  color: var(--color-bg);
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: 600;
-  line-height: 20px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 4px var(--space-2);
-  border-radius: var(--radius-pill);
-}
-
-/* ─── Tindel: ritual card ─── */
-.ritual-card {
-  background-color: var(--color-surface-dark);
-  border: 1px solid var(--color-border-dark);
-  border-radius: var(--radius-md);
-  padding: var(--space-3);
-}
-
-/* ─── Tindel: primary button ─── */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 48px;
-  padding: 0 var(--space-3);
-  background-color: var(--color-accent);
-  color: var(--color-bg);
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  font-weight: 600;
-  line-height: 20px;
-  border-radius: var(--radius-md);
-  border: none;
-  cursor: pointer;
-  white-space: nowrap;
-  outline: 2px solid transparent;
-  outline-offset: 1px;
-  transition: background-color 120ms var(--ease-out),
-              transform 60ms var(--ease-out),
-              box-shadow 120ms var(--ease-out);
-}
-.btn-primary:hover {
-  background-color: var(--color-accent-dark);
-}
-.btn-primary:focus-visible {
-  outline: 2px solid var(--color-focus);
-  box-shadow: var(--shadow-focus-ring);
-}
-.btn-primary:active {
-  transform: scale(0.98);
-  box-shadow: 0 2px 6px rgba(13, 12, 11, 0.08);
-}
-.btn-primary:disabled,
-.btn-primary[aria-disabled="true"] {
-  background-color: #CFCBC7;
-  color: #777370;
-  cursor: not-allowed;
-  opacity: 0.55;
-}
-
-/* ─── Tindel: secondary button ─── */
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 48px;
-  padding: 0 var(--space-3);
-  background-color: transparent;
-  color: var(--color-text-dark);
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  font-weight: 600;
-  line-height: 20px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border-dark);
-  cursor: pointer;
-  white-space: nowrap;
-  outline: 2px solid transparent;
-  outline-offset: 1px;
-  transition: border-color 120ms var(--ease-out),
-              color 120ms var(--ease-out),
-              transform 60ms var(--ease-out);
-}
-.btn-secondary:hover {
-  border-color: var(--color-text-muted-dark);
-  color: var(--color-bg);
-}
-.btn-secondary:focus-visible {
-  outline: 2px solid var(--color-focus);
-  box-shadow: var(--shadow-focus-ring);
-}
-.btn-secondary:active {
-  transform: scale(0.98);
-}
-.btn-secondary:disabled,
-.btn-secondary[aria-disabled="true"] {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-/* ─── Tindel: form input ─── */
-.form-input {
-  display: block;
-  width: 100%;
-  height: 48px;
-  padding: 0 var(--space-2);
-  background-color: var(--color-surface);
+body {
+  background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
-  font-size: var(--text-body);
-  line-height: 24px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  outline: 2px solid transparent;
-  outline-offset: 1px;
-  transition: border-color 120ms var(--ease-out),
-              box-shadow 120ms var(--ease-out);
-}
-.form-input:hover {
-  border-color: var(--color-text-muted);
-}
-.form-input:focus-visible {
-  border-color: var(--color-accent);
-  outline: 2px solid var(--color-focus);
-  box-shadow: var(--shadow-focus-ring);
-}
-.form-input.error {
-  border-color: #C0392B;
-}
-.form-input:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
+  font-size: var(--type-body-font-size);
+  line-height: var(--type-body-line-height);
+  font-weight: var(--type-body-font-weight);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
 }
 
-/* ─── Tindel: helper text ─── */
-.form-helper {
-  min-height: 1lh;
-  font-size: var(--text-small);
-  line-height: 20px;
-  color: var(--color-text-muted);
-  margin-top: 4px;
-}
-.form-helper.error {
-  color: #C0392B;
+/* ------------------------------------------------------------
+   4. TYPOGRAPHY BASE
+   ------------------------------------------------------------ */
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--type-h1-font-size);
+  line-height: var(--type-h1-line-height);
+  font-weight: var(--type-h1-font-weight);
+  letter-spacing: var(--type-h1-letter-spacing);
+  color: var(--color-text);
 }
 
-/* ─── Tindel: skeleton loader ─── */
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--color-surface) 25%,
-    var(--color-muted-surface) 50%,
-    var(--color-surface) 75%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--type-h2-font-size);
+  line-height: var(--type-h2-line-height);
+  font-weight: var(--type-h2-font-weight);
+  color: var(--color-text);
+}
+
+h3 {
+  font-family: var(--font-body);
+  font-size: var(--type-h3-font-size);
+  line-height: var(--type-h3-line-height);
+  font-weight: var(--type-h3-font-weight);
+  color: var(--color-text);
+}
+
+h4 {
+  font-family: var(--font-body);
+  font-size: var(--type-h4-font-size);
+  line-height: var(--type-h4-line-height);
+  font-weight: var(--type-h4-font-weight);
+  color: var(--color-text);
+}
+
+p {
+  font-size: var(--type-body-font-size);
+  line-height: var(--type-body-line-height);
+  color: var(--color-text);
+}
+
+small {
+  font-size: var(--type-small-font-size);
+  line-height: var(--type-small-line-height);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
-@keyframes skeleton-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+
+/* ------------------------------------------------------------
+   5. FOCUS RING (global)
+   ------------------------------------------------------------ */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
-@media (prefers-reduced-motion: reduce) {
-  .skeleton { animation: none; background: var(--color-surface); }
+
+/* ------------------------------------------------------------
+   6. IMAGES & MEDIA
+   ------------------------------------------------------------ */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ------------------------------------------------------------
+   7. INTERACTIVE ELEMENTS
+   ------------------------------------------------------------ */
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--type-button-font-size);
+  font-weight: var(--type-button-font-weight);
+  line-height: var(--type-button-line-height);
+  border: none;
+  background: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+  font-size: var(--type-body-font-size);
+  line-height: var(--type-body-line-height);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-1) var(--space-2);
+  width: 100%;
+  transition: border-color var(--duration-base) var(--ease-out);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(214, 90, 26, 0.15);
+}
+
+/* ------------------------------------------------------------
+   8. UTILITY CLASSES
+   ------------------------------------------------------------ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: var(--space-2);
+  }
 }
