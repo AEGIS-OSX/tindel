@@ -412,3 +412,16 @@ select:focus {
   color: var(--color-text-muted);
   opacity: 1;
 }
+
+/* ------------------------------------------------------------
+   10. FORM HELPER TEXT
+   min-height: 1lh reserves one line of space so that helper
+   and error messages appear without causing layout shift.
+   ------------------------------------------------------------ */
+.form-helper {
+  font-family: var(--font-body);
+  font-size: var(--type-caption-font-size);
+  line-height: var(--type-caption-line-height);
+  color: var(--color-text-muted);
+  min-height: 1lh;
+}
