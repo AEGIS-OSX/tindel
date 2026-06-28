@@ -28,13 +28,17 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [alreadyOnList, setAlreadyOnList] = useState(false);
 
+  const [roastPref, setRoastPref] = useState("");
+  const [cadencePref, setCadencePref] = useState("");
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
 
   function validateEmail(value: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     let valid = true;
 
@@ -55,11 +59,33 @@ export default function Home() {
     if (!valid) return;
 
     setSubmitting(true);
-    // Simulate async submission
-    setTimeout(() => {
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          roastPref,
+          cadencePref,
+          consentFlag: true,
+          consentTimestamp: new Date().toISOString(),
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setSubmitError(data.error ?? "Something went wrong. Please try again.");
+        setSubmitting(false);
+        return;
+      }
+      const data = await res.json();
+      setAlreadyOnList(data.alreadyOnList ?? false);
       setSubmitting(false);
       setSubmitted(true);
-    }, 1200);
+    } catch {
+      setSubmitError("Network error. Please try again.");
+      setSubmitting(false);
+    }
   }
 
   const faqs = [
@@ -566,6 +592,8 @@ export default function Home() {
                       id="roast-pref"
                       name="roast-pref"
                       className="form-input"
+                      value={roastPref}
+                      onChange={(e) => setRoastPref(e.target.value)}
                     >
                       <option value="">Select a roast</option>
                       <option value="light">Light</option>
@@ -587,6 +615,8 @@ export default function Home() {
                       id="cadence-pref"
                       name="cadence-pref"
                       className="form-input"
+                      value={cadencePref}
+                      onChange={(e) => setCadencePref(e.target.value)}
                     >
                       <option value="">Select a cadence</option>
                       <option value="weekly">Weekly</option>
@@ -625,6 +655,15 @@ export default function Home() {
                       {consentError}
                     </p>
                   </div>
+
+                  {submitError && (
+                    <p
+                      role="alert"
+                      className="text-sm font-[family-name:var(--font-body)] text-[var(--color-accent)]"
+                    >
+                      {submitError}
+                    </p>
+                  )}
 
                   <button
                     type="submit"
