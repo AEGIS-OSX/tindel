@@ -28,3 +28,274 @@ html, body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
 }
+
+/* ─── Tindel: base resets ─── */
+html,
+body {
+  overflow-x: clip; /* clip not hidden — preserves position:sticky */
+}
+
+/* ─── Tindel: animation easing tokens ─── */
+:root {
+  --ease-tindel: cubic-bezier(0.2, 0.9, 0.25, 1);
+  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0.0, 0.6, 1);
+
+  /* Dark-surface tokens (used in hero and How It Works sections) */
+  --color-surface-dark: #121212;
+  --color-border-dark: #232221;
+  --color-text-dark: #EDEBE9;
+  --color-text-muted-dark: #BDB6AF;
+  --color-bg-dark: #0B0A09;
+
+  /* Focus ring */
+  --color-focus: var(--color-accent);
+  --shadow-focus: 0 0 0 4px rgba(214, 90, 26, 0.18);
+
+  /* Type scale tokens */
+  --text-display: 64px;
+  --text-h2: 34px;
+  --text-h3: 24px;
+  --text-h4: 18px;
+  --text-body: 16px;
+  --text-small: 14px;
+  --text-caption: 13px;
+
+  /* Spacing scale (8px base) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 80px;
+  --space-9: 120px;
+
+  /* Radius system — ONE consistent set */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 6px 20px var(--color-shadow);
+  --shadow-focus-ring: 0 0 0 4px rgba(214, 90, 26, 0.12);
+}
+
+/* ─── Tindel: base typography ─── */
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 24px;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Tindel: focus ring system ─── */
+*:focus {
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+}
+*:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+  box-shadow: var(--shadow-focus-ring);
+}
+
+/* ─── Tindel: display heading base ─── */
+.tindel-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  line-height: 72px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+/* ─── Tindel: reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Tindel: numbered-drop badge ─── */
+.drop-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px var(--space-2);
+  border-radius: var(--radius-pill);
+}
+
+/* ─── Tindel: ritual card ─── */
+.ritual-card {
+  background-color: var(--color-surface-dark);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+
+/* ─── Tindel: primary button ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 var(--space-3);
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 20px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+  transition: background-color 120ms var(--ease-out),
+              transform 60ms var(--ease-out),
+              box-shadow 120ms var(--ease-out);
+}
+.btn-primary:hover {
+  background-color: var(--color-accent-dark);
+}
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-focus);
+  box-shadow: var(--shadow-focus-ring);
+}
+.btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 6px rgba(13, 12, 11, 0.08);
+}
+.btn-primary:disabled,
+.btn-primary[aria-disabled="true"] {
+  background-color: #CFCBC7;
+  color: #777370;
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* ─── Tindel: secondary button ─── */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 var(--space-3);
+  background-color: transparent;
+  color: var(--color-text-dark);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-dark);
+  cursor: pointer;
+  white-space: nowrap;
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+  transition: border-color 120ms var(--ease-out),
+              color 120ms var(--ease-out),
+              transform 60ms var(--ease-out);
+}
+.btn-secondary:hover {
+  border-color: var(--color-text-muted-dark);
+  color: var(--color-bg);
+}
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--color-focus);
+  box-shadow: var(--shadow-focus-ring);
+}
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+.btn-secondary:disabled,
+.btn-secondary[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ─── Tindel: form input ─── */
+.form-input {
+  display: block;
+  width: 100%;
+  height: 48px;
+  padding: 0 var(--space-2);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+  transition: border-color 120ms var(--ease-out),
+              box-shadow 120ms var(--ease-out);
+}
+.form-input:hover {
+  border-color: var(--color-text-muted);
+}
+.form-input:focus-visible {
+  border-color: var(--color-accent);
+  outline: 2px solid var(--color-focus);
+  box-shadow: var(--shadow-focus-ring);
+}
+.form-input.error {
+  border-color: #C0392B;
+}
+.form-input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ─── Tindel: helper text ─── */
+.form-helper {
+  min-height: 1lh;
+  font-size: var(--text-small);
+  line-height: 20px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+.form-helper.error {
+  color: #C0392B;
+}
+
+/* ─── Tindel: skeleton loader ─── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface) 25%,
+    var(--color-muted-surface) 50%,
+    var(--color-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; background: var(--color-surface); }
+}
