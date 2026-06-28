@@ -34,6 +34,10 @@
   --color-brass-dark: #B08B57;
   --color-shadow-dark: rgba(0, 0, 0, 0.6);
 
+  /* Color — focus */
+  --color-focus: #D65A1A;
+  --shadow-focus: 0 0 0 3px rgba(214, 90, 26, 0.25);
+
   /* Typography — families */
   --font-display: "Domaine Display", "Playfair Display", Georgia, serif;
   --font-body: "Söhne Text", "Merriweather Sans", "Helvetica Neue", Arial, sans-serif;
@@ -75,6 +79,17 @@
   --type-label-line-height: 20px;
   --type-label-font-weight: 600;
 
+  /* Text scale tokens (numeric ramp: 12, 13, 14, 16, 18, 24, 32, 48, 64) */
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
+  --text-3xl: 48px;
+  --text-4xl: 64px;
+
   /* Spacing — 8px base scale */
   --space-0: 0px;
   --space-1: 8px;
@@ -105,6 +120,7 @@
   --bp-2xl: 1440px;
 
   /* Transitions */
+  --ease-tindel: cubic-bezier(0.2, 0.8, 0.12, 1);
   --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
   --ease-in-out: cubic-bezier(0.4, 0.0, 0.2, 1);
   --duration-fast: 150ms;
@@ -229,7 +245,7 @@ a {
 }
 
 a:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
@@ -238,7 +254,7 @@ a:focus-visible {
    5. FOCUS RING (global)
    ------------------------------------------------------------ */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
@@ -290,8 +306,8 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(214, 90, 26, 0.15);
+  border-color: var(--color-focus);
+  box-shadow: var(--shadow-focus);
 }
 
 /* ------------------------------------------------------------
